@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mizan Academy - Processing...</title>
+</head>
+<body>
+    <script>
+        // جلب المعاملات من الرابط
+        const urlParams = new URLSearchParams(window.location.search);
+        const mode = urlParams.get('mode'); // نوع العملية (resetPassword أو verifyEmail)
+        const oobCode = urlParams.get('oobCode');
+        const apiKey = urlParams.get('apiKey');
+
+        // بناء رابط التوجيه بناءً على نوع العملية
+        let targetUrl = "";
+
+        if (mode === 'resetPassword') {
+            targetUrl = "https://qsk5000.github.io/Sr/"; // صفحة الباسوورد الخاصة بك
+        } else if (mode === 'verifyEmail') {
+            targetUrl = "https://qsk5000.github.io/Ver"; // صفحة التأكيد التي صممناها
+        }
+
+        if (targetUrl !== "") {
+            // توجيه المستخدم مع الحفاظ على الكود (oobCode)
+            window.location.href = `${targetUrl}?mode=${mode}&oobCode=${oobCode}&apiKey=${apiKey}`;
+        } else {
+            document.body.innerHTML = "رابط غير صالح أو عملية غير مدعومة.";
+        }
+    </script>
+</body>
+</html>
